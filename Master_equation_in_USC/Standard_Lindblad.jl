@@ -55,7 +55,6 @@ labels_list = ["Energy", "|G> (Dressed Ground State)"]
 
 # basis(2, 1) is |g> and basis(2, 0) is |e> 
 g_state = 1
-e_state = 0
 
 println("Generating trackers for all $(Na1 * Na2 * Nq) states...")
 for n1 in 0:(Na1-1)
