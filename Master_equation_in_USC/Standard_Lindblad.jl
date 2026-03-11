@@ -107,19 +107,25 @@ p1 = Plots.plot(t, energy, label="<H>", color=:red, lw=2,
           ylabel=L"Energy \ (\hbar\omega_1)", xlabel=L"Time \ (1/\omega_1)",
           title="System Energy vs Time", framestyle=:box)
 
-# Panel 2: Population 
+# Panel 2: Population of Bare Vacuum State
 p2 = Plots.plot(t, pop_00g, label=L"|0,0,g\rangle", color=:blue, lw=2,
           xlabel=L"Time \ (1/\omega_1)", ylabel="Population", 
           title="Bare Vacuum Population vs Time", framestyle=:box)
 
-# Panel 3: Top Leakage States
-p3 = Plots.plot(xlabel=L"Time \ (1/\omega_1)", ylabel="Population", 
+# Panel 3: Population of Dressed Ground State
+p3 = Plots.plot(t, real.(sol.expect[2, :]), label=L"|G\rangle", color=:blue, lw=2,
+          xlabel=L"Time \ (1/\omega_1)", ylabel="Population", 
+          title="Dressed Ground State Population vs Time", framestyle=:box)
+
+
+# Panel 4: Top Leakage States
+p4 = Plots.plot(xlabel=L"Time \ (1/\omega_1)", ylabel="Population", 
           title="Top Populated Leakage States", framestyle=:box)
 for k in 1:5
     val, idx = leakage_peaks[k]
-    Plots.plot!(p3, t, real.(sol.expect[idx, :]), label=labels_list[idx], lw=2)
+    Plots.plot!(p4, t, real.(sol.expect[idx, :]), label=labels_list[idx], lw=2)
 end
 
 # Combine into a 3-row layout
-fig = Plots.plot(p1, p2, p3, layout=(3, 1), size=(800, 900), margin=5Plots.mm)
+fig = Plots.plot(p1, p2, p3, p4, layout=(4, 1), size=(800, 1000), margin=5Plots.mm)
 Plots.display(fig)
