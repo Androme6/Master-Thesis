@@ -36,8 +36,8 @@ function cat_evolution(wa1, wa2, g, k, F, na1_0, tmax, steps = 1000)
     psi0 = tensor(fock(Na1, na1_0), fock(Na2, 0))
 
     # Evolve the system
-    tlist = LinRange(0.0, tmax, steps)
-    sol = mesolve(H, psi0, tlist, c_ops)
+    t = LinRange(0.0, tmax, steps)
+    sol = mesolve(H, psi0, t, c_ops)
 
     return sol 
 end
